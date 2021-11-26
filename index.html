@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>悦积分</title>
+  <script src="./src/vue.min.js"></script>
+  <script src="./src/jquery.min.js"></script>
+  <link rel="stylesheet" href="./src/index.css">
+  <style>
+    ul li{
+      list-style:none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <h3 style="text-align: center;">积分数据</h3>
+    <div style="border-top: 1px solid #EBEEF5;margin: 10px 0;"></div>
+    <el-button type="primary" plain size="medium" @click="settodo()">部 门</el-button>
+    <ul v-show="todoList">
+      <li v-for="item in list" :key="item.dept_id" >
+        <el-button size="small"  @click=itemShow(item.dept_id) plain>{{item.name}}</el-button>
+	
+      </li>
+      
+    </ul>
+    <div v-show="todoList" style="border-top: 1px solid #EBEEF5;margin: 10px 0;"></div>
+    <el-table
+    :data="tableData"
+    style="width: 100%">
+    <el-table-column
+      prop="name"
+      label="姓名"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="step_count"
+      label="步数"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="sport_code"
+      label="运动得分">
+    </el-table-column>
+<el-table-column
+      prop="attendance_code"
+      label="考勤得分">
+    </el-table-column>
+<el-table-column
+      prop="report_code"
+      label="日志得分">
+    </el-table-column>
+
+
+  </el-table>
+  </div>
+  
+</body>
+<script src="./src/index.js"></script>
+<script>
+  var test = new Vue({
+        el: "#app",
+        data: {
+            list: [],
+            todoList:false,
+            tableData: []
+        },
+        methods: {
+          settodo(){
+            let tais = this
+            tais.todoList = !tais.todoList
+            $.get(window.location.href+'/dingapi?data_type=department',
+                function(data,textStatus){
+                    console.log(data)
+                    tais.list = JSON.parse(data)
+            
+                })
+          },
+	      itemShow(id){
+		    let selt = this
+		    $.get(window.location.href+`/dingapi?data_type=code&dept_id=${id}`,
+            function(data,textStatus){
+		        selt.tableData = JSON.parse(data)
+            })
+
+	      }
+        }
+    })
+</script>
+</html>
