@@ -7,17 +7,19 @@
 企业可通过创建内部应用，根据不同维度的（日志、考勤、运动）等，进行员工或部门员工的积分排名，或进行数据统计等能力，实现企业员工的高效管理，及数字化转型。
 
 **目录结构**
-
+```
  ├── README.md
  ├── dingapi
- │   ├── Autoloader.php		 自动加载
+ │   ├── Autoloader.php		  自动加载
  │   ├── Dingconfig.php		  全局配置文件
- │   ├── api								接口目录
- │   ├── index.php					初始化过程
+ │   ├── api		          接口目录
+ │   ├── index.php		  初始化过程
  │   └── request
  │       └── Http.php
- ├── index.html						主页面
- └── src									 静态资源
+ ├── index.html			  主页面
+ └── src		          静态资源
+```
+
 
 ### 研发环境准备
 
